@@ -1,0 +1,4 @@
+namespace: argocd
+resources:
+  - argo-cd-namespace.yaml
+  - argo-cd.yaml

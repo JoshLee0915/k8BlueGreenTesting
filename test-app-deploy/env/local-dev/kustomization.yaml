@@ -1,0 +1,11 @@
+namespace: test-app
+resources:
+  - ../../app
+  - ingress.yaml
+replicas:
+  - name: test-app
+    count: 5
+images:
+  - name: test-app-image
+    newName: jleetaxact/bg-test-app
+    newTag: 1.0.0

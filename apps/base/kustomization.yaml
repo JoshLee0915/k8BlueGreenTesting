@@ -1,0 +1,5 @@
+resources:
+  - testing-app.yaml
+  - testing-project.yaml
+  - ../argo-cd
+  - ../test-app

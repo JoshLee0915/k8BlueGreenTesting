@@ -1,0 +1,5 @@
+resources:
+  - ../../app
+  - ingress.yaml
+patchesStrategicMerge:
+  - argocd-cmd-params-cm.yaml

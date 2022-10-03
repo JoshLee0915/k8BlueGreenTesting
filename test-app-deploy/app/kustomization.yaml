@@ -1,0 +1,4 @@
+resources:
+  - test-app-namespace.yaml
+  - test-app-deployment.yaml
+  - test-app-service.yaml
