@@ -1,0 +1,5 @@
+namespace: argo-rollouts
+resources:
+  - argo-rollouts-namespace.yaml
+  - argo-rollouts.yaml
+  - argo-rollouts-dashboard.yaml
