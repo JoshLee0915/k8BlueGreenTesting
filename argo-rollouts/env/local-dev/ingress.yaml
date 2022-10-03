@@ -20,4 +20,3 @@ spec:
             name: argo-rollouts-dashboard
             port:
               number: 80
-              targetPort: 3100
