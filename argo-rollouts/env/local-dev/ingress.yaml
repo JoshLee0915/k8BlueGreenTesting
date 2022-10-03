@@ -19,4 +19,4 @@ spec:
           service: 
             name: argo-rollouts-dashboard
             port:
-              number: 80
+              number: 3100
