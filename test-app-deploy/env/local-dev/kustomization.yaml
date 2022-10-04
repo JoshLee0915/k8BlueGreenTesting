@@ -8,4 +8,4 @@ replicas:
 images:
   - name: test-app-image
     newName: jleetaxact/bg-test-app
-    newTag: 1.0.0
+    newTag: 2.0.0
