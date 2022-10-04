@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: test-app
+spec:
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      containers:
+      - name: test-app
+        image: test-app-image
+        ports:
+        - containerPort: 3000
+          name: test-app-svc
+        livenessProbe:
+          httpGet:
+            path: /test-app
+            port: test-app-svc
+          initialDelaySeconds: 10
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /test-app
+            port: test-app-svc
+          initialDelaySeconds: 15
+          periodSeconds: 1
+  strategy:
+    blueGreen:
+      activeService: test-app-service
+      previewService: test-app-service-preview
+      autoPromotionEnabled: false

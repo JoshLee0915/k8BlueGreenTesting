@@ -1,4 +1,7 @@
+configurations:
+  - https://argoproj.github.io/argo-rollouts/features/kustomize/rollout-transform.yaml
+
 resources:
   - test-app-namespace.yaml
-  - test-app-deployment.yaml
+  - test-app-rollout.yaml
   - test-app-service.yaml
