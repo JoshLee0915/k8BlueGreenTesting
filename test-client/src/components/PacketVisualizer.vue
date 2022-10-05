@@ -1,12 +1,11 @@
 <template>
-  <canvas ref="visualizerCanvas" :width=width :height=height style="border:1px solid #000000;"/>
+  <canvas ref="visualizerCanvas" :height=height style="border:1px solid #000000;"/>
 </template>
 
 <script>
 export default {
   name: "PacketVisualizer",
   props: {
-    width: String,
     height: String,
     minRadius: {
       type: Number,
@@ -27,6 +26,7 @@ export default {
     }
   },
   data: () => ({
+    width: window.innerWidth,
     canvasCtx: null,
     packets: []
   }),
@@ -98,15 +98,16 @@ export default {
       this.packets.forEach(packet => this.animatePacket(packet, 5))
       this.packets = this.packets.filter(packet => packet.x + packet.radius >= 0)
     },
-    getPackets() {
+    async getPackets() {
       if(this.packetGenerator) {
-        this.spawnPacket(this.packetGenerator())
+        this.spawnPacket(await this.packetGenerator())
       } else {
         this.spawnPacket({error: { code: 401 }})
       }
     },
   },
   mounted() {
+    this.$refs.visualizerCanvas.width = window.innerWidth
     this.canvasCtx = this.$refs.visualizerCanvas.getContext('2d')
     setInterval(this.update, this.refreshRate)
     setInterval(this.getPackets, this.packetRefreshRate)

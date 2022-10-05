@@ -5,44 +5,23 @@
       color="primary"
       dark
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      <v-spacer/>
+      <v-select
+          v-model="selectedItem"
+          :key="selectedItem.text"
+          :items="items"
+          return-object
+      />
     </v-app-bar>
 
     <v-main>
       <PacketVisualizer
-          width="1300px"
+          class="visualizer"
           height="800px"
           :min-radius="50"
           :max-radius="100"
+          :packet-generator="selectedItem?.value"
+          :packet-refresh-rate="100"
       />
     </v-main>
   </v-app>
@@ -50,6 +29,7 @@
 
 <script>
 import PacketVisualizer from "@/components/PacketVisualizer";
+import axios from "axios";
 
 export default {
   name: 'App',
@@ -59,7 +39,53 @@ export default {
   },
 
   data: () => ({
-    //
+    selectedItem: null,
+    items: [{
+      text: 'Test',
+      value: undefined
+    }]
   }),
+
+  methods: {
+    getBGActive() {
+      return this.runRequest('http://localhost:3000/active/test')
+    },
+    getBGPreview() {
+      return this.runRequest('http://localhost:3000/preview/test')
+    },
+    getBGCanary() {
+      return this.runRequest('http://localhost:3000/canary/test')
+    },
+    async runRequest(url){
+      try {
+        const response = await axios.get(url)
+        return {...response.data}
+      } catch (e) {
+        return {error: { code: e.response?.status ?? 'UKN' }}
+      }
+    }
+  },
+  mounted() {
+    this.items = [{
+      text: 'Test',
+      value: undefined
+    },{
+      text: 'BG Active',
+      value: this.getBGActive
+    },{
+      text: 'BG Preview',
+      value: this.getBGPreview
+    },{
+      text: 'Canary',
+      value: this.getBGCanary
+    }]
+    this.selectedItem = this.items[0]
+  }
 };
 </script>
+
+<style>
+.visualizer {
+  margin-top: 1rem;
+}
+</style>
