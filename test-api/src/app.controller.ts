@@ -7,7 +7,7 @@ export class AppController {
   @Get('test')
   getTestRequest() {
     return {
-      color: '#ffffff',
+      color: '#0048ff',
       version: '1.0'
     };
   }
