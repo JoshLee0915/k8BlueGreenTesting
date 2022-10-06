@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: test-api
+spec:
+  selector:
+    matchLabels:
+      app: test-api
+  template:
+    metadata:
+      labels:
+        app: test-api
+    spec:
+      containers:
+      - name: test-api
+        image: test-api-image
+        ports:
+        - containerPort: 3000
+          name: test-api-svc
+        env:
+          - name: color
+            valueFrom:
+              configMapKeyRef:
+                name: test-api-configmap
+                key: COLOR
+          - name: version
+            valueFrom:
+              configMapKeyRef:
+                name: test-api-configmap
+                key: VERSION
+          - name: flakiness
+            valueFrom:
+              configMapKeyRef:
+                name: test-api-configmap
+                key: FLAKINESS
+        livenessProbe:
+          httpGet:
+            path: /test
+            port: test-api-svc
+          initialDelaySeconds: 5
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /test
+            port: test-api-svc
+          initialDelaySeconds: 10
+          periodSeconds: 1

@@ -1,0 +1,25 @@
+namespace: test-api
+
+resources:
+  - ../../app
+  - ingress.yaml
+  - test-api-preview-service.yaml
+
+replicas:
+  - name: test-api
+    count: 2
+
+images:
+  - name: test-api-image
+    newName: jleetaxact/test-api
+    newTag: 1.0.0
+
+patchesStrategicMerge:
+  - test-api-rollout-patch.yaml
+
+configMapGenerator:
+  - name: test-api-configmap
+    literals:
+      - COLOR=#0033FFFF
+      - VERSION=1.0.0
+      - FLAKINESS=0

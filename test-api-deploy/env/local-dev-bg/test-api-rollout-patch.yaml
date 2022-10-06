@@ -1,0 +1,10 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: test-api
+spec:
+  strategy:
+    blueGreen:
+      activeService: test-api-service
+      previewService: test-api-preview-service
+      autoPromotionEnabled: false

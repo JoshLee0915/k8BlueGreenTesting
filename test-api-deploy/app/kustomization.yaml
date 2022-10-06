@@ -1,0 +1,9 @@
+namespace: test-api
+
+configurations:
+  - https://argoproj.github.io/argo-rollouts/features/kustomize/rollout-transform.yaml
+
+resources:
+  - test-api-namespace.yaml
+  - test-api-rollout.yaml
+  - test-api-service.yaml
