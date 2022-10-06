@@ -3,5 +3,5 @@ configurations:
 
 resources:
   - test-app-namespace.yaml
-  - test-app-rollout.yaml
+  - test-app-deployment.yaml
   - test-app-service.yaml
