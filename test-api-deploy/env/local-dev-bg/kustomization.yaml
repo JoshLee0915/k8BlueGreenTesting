@@ -4,6 +4,7 @@ resources:
   - ../../app
   - ingress.yaml
   - test-api-preview-service.yaml
+  - namespace.yaml
 
 replicas:
   - name: test-api
@@ -20,6 +21,6 @@ patchesStrategicMerge:
 configMapGenerator:
   - name: test-api-configmap
     literals:
-      - COLOR=#1AA603FF
+      - COLOR=#0033FFFF
       - VERSION=1.0.0
       - FLAKINESS=0
