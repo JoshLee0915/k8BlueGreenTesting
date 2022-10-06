@@ -5,3 +5,4 @@ resources:
   - ../argo-rollouts
   - ../test-app
   - ../test-api
+  - ../test-api-canary
