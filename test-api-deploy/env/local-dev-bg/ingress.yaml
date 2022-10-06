@@ -4,12 +4,12 @@ metadata:
   name: test-app-bg-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
   - http:
       paths:
-      - path: /test-api/bg/active
+      - path: /test-api/bg/active(/|$)(.*)
         pathType: Prefix
         backend:
           service: 
@@ -23,12 +23,12 @@ metadata:
   name: test-app-bg-ingress-preview
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
   - http:
       paths:
-      - path: /test-api/bg/preview
+      - path: /test-api/bg/preview(/|$)(.*)
         pathType: Prefix
         backend:
           service: 
