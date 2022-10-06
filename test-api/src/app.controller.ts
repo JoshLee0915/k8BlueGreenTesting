@@ -6,7 +6,7 @@ export class AppController {
 
   @Get('test')
   getTestRequest() {
-    const color = process.env.color ?? '#ffffff'
+    const color = process.env.color ?? '#1aa603'
     const version = process.env.version ?? '0.0'
     const flaky = Number(process.env.flakiness) ?? 0.0
 
