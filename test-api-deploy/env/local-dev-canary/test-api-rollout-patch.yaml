@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: test-api
+spec:
+  canary:
+    steps:
+      - setWeight: 10
+      - pause:
+          duration: 10s
+      - setWeight: 25
+      - pause:
+          duration: 10s
+      - setWeight: 50
+      - pause:
+          duration:
+      - setWeight: 60
+      - pause:
+          duration: 5s
+      - setWeight: 70
+      - pause:
+          duration: 5s
+      - setWeight: 75
+      - pause:
+          duration: 
+      - setWeight: 100
+      - pause:
+          duration: 10s
