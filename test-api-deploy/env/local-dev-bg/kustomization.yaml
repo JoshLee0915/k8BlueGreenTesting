@@ -21,6 +21,10 @@ patchesStrategicMerge:
 configMapGenerator:
   - name: test-api-configmap
     literals:
+      # Blue
       - COLOR=#0033FFFF
       - VERSION=1.0.0
+      # Green
+      #- COLOR=#1AA603FF
+      #- VERSION=2.0.0
       - FLAKINESS=0
