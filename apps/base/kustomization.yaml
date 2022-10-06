@@ -4,3 +4,4 @@ resources:
   - ../argo-cd
   - ../argo-rollouts
   - ../test-app
+  - ../test-api
