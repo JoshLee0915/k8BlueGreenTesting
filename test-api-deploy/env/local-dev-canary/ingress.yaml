@@ -9,7 +9,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /test-api/canary/(/|$)(.*)
+      - path: /test-api/canary(/|$)(.*)
         pathType: Prefix
         backend:
           service: 
